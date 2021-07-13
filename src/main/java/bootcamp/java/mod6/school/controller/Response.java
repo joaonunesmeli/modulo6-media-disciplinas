@@ -1,37 +1,39 @@
 package bootcamp.java.mod6.school.controller;
 
+import bootcamp.java.mod6.school.dto.Student;
+
 public class Response {
-    private String mensagem;
-    private double media;
-    private String aluno;
+    private String message;
+    private double average;
+    private Student student;
 
-    public Response(String mensagem, double media, String aluno) {
-        this.mensagem = mensagem;
-        this.media = media;
-        this.aluno = aluno;
+    public Response(String message, double average, Student student) {
+        this.message = message;
+        this.average = average;
+        this.student = student;
     }
 
-    public String getMensagem() {
-        return mensagem;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public double getMedia() {
-        return media;
+    public double getAverage() {
+        return average;
     }
 
-    public void setMedia(double media) {
-        this.media = media;
+    public void setAverage(double average) {
+        this.average = average;
     }
 
-    public String getAluno() {
-        return aluno;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setAluno(String aluno) {
-        this.aluno = aluno;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
