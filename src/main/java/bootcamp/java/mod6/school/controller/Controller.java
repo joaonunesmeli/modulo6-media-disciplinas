@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class Controller {
     @PostMapping("/analyzeNotes")
-    public Response media(@RequestBody Student s) {
+    public Response media(@RequestBody @Valid Student s) {
         Response r = new Response("", 0.0, new Student());
         if (s == null) {
             return r;
