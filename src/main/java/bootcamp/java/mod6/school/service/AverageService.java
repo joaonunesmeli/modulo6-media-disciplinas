@@ -25,14 +25,14 @@ public class AverageService {
 
     private String getMessage(double average) {
         if (average == 0.0) {
-            return "Desista...";
+            return AverageServiceMessage.ZERO;
         }
         if (average < 7.0) {
-            return "Não conseguiu nem ficar na média... Nos vemos ano que vem de novo.";
+            return AverageServiceMessage.BELOW_SEVEN;
         }
         if (average <= 9.0) {
-            return "A média não está acima de 9 'mais' 'tá' 'safe'. Próximo na fila!";
+            return AverageServiceMessage.BELOW_NINE;
         }
-        return "Parabéns! Não fez mais do que a sua obrigação!";
+        return AverageServiceMessage.MAX;
     }
 }
