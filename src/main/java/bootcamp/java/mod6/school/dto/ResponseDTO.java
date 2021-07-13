@@ -1,13 +1,11 @@
-package bootcamp.java.mod6.school.controller;
+package bootcamp.java.mod6.school.dto;
 
-import bootcamp.java.mod6.school.dto.Student;
-
-public class Response {
+public class ResponseDTO {
     private String message;
     private double average;
-    private Student student;
+    private StudentDTO student;
 
-    public Response(String message, double average, Student student) {
+    public ResponseDTO(String message, double average, StudentDTO student) {
         this.message = message;
         this.average = average;
         this.student = student;
@@ -29,11 +27,11 @@ public class Response {
         this.average = average;
     }
 
-    public Student getStudent() {
+    public StudentDTO getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(StudentDTO student) {
         this.student = student;
     }
 }

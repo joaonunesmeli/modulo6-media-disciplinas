@@ -1,12 +1,13 @@
 package bootcamp.java.mod6.school.dto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
-public class Student {
+public class StudentDTO {
     @NotNull(message = "O nome é um campo obrigatório")
     @Min(value = 8, message = "Nome muito curto, ele deve ter no mínimo 8 caracteres")
     @Max(value = 50, message = "Nome muito longo, ele deve ter no máximo 50 caracteres")
@@ -14,12 +15,14 @@ public class Student {
     private String name;
 
     @NotNull(message = "A lista de disciplinas é um campo obrigatório")
-    private List<Subject> subjects;
+    @Min(value = 1, message = "Forneça ao menos umas disciplina")
+    @Valid
+    private List<SubjectDTO> subjects;
 
-    public Student() {
+    public StudentDTO() {
     }
 
-    public Student(String name, List<Subject> subjects) {
+    public StudentDTO(String name, List<SubjectDTO> subjects) {
         this.name = name;
         this.subjects = subjects;
     }
@@ -32,11 +35,11 @@ public class Student {
         this.name = name;
     }
 
-    public List<Subject> getSubjects() {
+    public List<SubjectDTO> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<Subject> subjects) {
+    public void setSubjects(List<SubjectDTO> subjects) {
         this.subjects = subjects;
     }
 }

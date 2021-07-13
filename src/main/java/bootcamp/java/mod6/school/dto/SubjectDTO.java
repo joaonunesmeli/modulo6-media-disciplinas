@@ -5,7 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class Subject {
+public class SubjectDTO {
     @NotNull(message = "O nome é um campo obrigatório")
     @Min(value = 8, message = "Nome muito curto, ele deve ter no mínimo 8 caracteres")
     @Max(value = 50, message = "Nome muito longo, ele deve ter no máximo 50 caracteres")
@@ -16,10 +16,10 @@ public class Subject {
     @Max(value = 99, message = "A nota não deve ser maior do que noventa e nove")
     private int note;
 
-    public Subject() {
+    public SubjectDTO() {
     }
 
-    public Subject(String name, int note) {
+    public SubjectDTO(String name, int note) {
         this.name = name;
         this.note = note;
     }
