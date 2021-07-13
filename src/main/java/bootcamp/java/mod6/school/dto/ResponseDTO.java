@@ -34,4 +34,14 @@ public class ResponseDTO {
     public void setStudent(StudentDTO student) {
         this.student = student;
     }
+
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(ResponseDTO.class)) {
+            return false;
+        }
+        ResponseDTO r = (ResponseDTO) obj;
+        return this.message.equals(r.message)
+                && this.average == r.average
+                && this.student.equals(r.student);
+    }
 }

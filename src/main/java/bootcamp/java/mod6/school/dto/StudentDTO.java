@@ -15,14 +15,6 @@ public class StudentDTO {
     @Valid
     private List<SubjectDTO> subjects;
 
-    public StudentDTO() {
-    }
-
-    public StudentDTO(String name, List<SubjectDTO> subjects) {
-        this.name = name;
-        this.subjects = subjects;
-    }
-
     public String getName() {
         return name;
     }
@@ -37,5 +29,14 @@ public class StudentDTO {
 
     public void setSubjects(List<SubjectDTO> subjects) {
         this.subjects = subjects;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(StudentDTO.class)) {
+            return false;
+        }
+        StudentDTO s = (StudentDTO) obj;
+        return this.name.equals(s.name) && this.subjects.equals(s.subjects);
     }
 }

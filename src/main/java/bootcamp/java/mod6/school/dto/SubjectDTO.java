@@ -35,4 +35,12 @@ public class SubjectDTO {
     public void setNote(int note) {
         this.note = note;
     }
+
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(SubjectDTO.class)) {
+            return false;
+        }
+        SubjectDTO s = (SubjectDTO) obj;
+        return this.name.equals(s.name) && this.note == s.note;
+    }
 }
