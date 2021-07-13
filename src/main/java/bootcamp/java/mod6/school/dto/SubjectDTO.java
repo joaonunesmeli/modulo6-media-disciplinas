@@ -1,15 +1,11 @@
 package bootcamp.java.mod6.school.dto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 public class SubjectDTO {
     @NotNull(message = "O nome é um campo obrigatório")
-    @Min(value = 8, message = "Nome muito curto, ele deve ter no mínimo 8 caracteres")
-    @Max(value = 50, message = "Nome muito longo, ele deve ter no máximo 50 caracteres")
     @Pattern(regexp = "[a-z]+", message = "O nome só pode conter caracteres de 'a' à 'z'")
+    @Size(min = 8, max = 50, message = "O nome deve ter entre 8 e 50 caracteres")
     private String name;
 
     @Min(value = 0, message = "A nota não deve ser menor do que zero")

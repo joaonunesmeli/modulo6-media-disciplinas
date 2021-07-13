@@ -23,7 +23,7 @@ public class Controller {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/analyzeNotes")
-    public ResponseDTO analyzeNotes(@RequestBody @Valid StudentDTO s) {
+    public ResponseDTO analyzeNotes(@Valid @RequestBody StudentDTO s) {
         return this.service.average(s);
     }
 }
