@@ -4,8 +4,9 @@ import bootcamp.java.mod6.school.dto.DiplomaDTO;
 import bootcamp.java.mod6.school.dto.StudentDTO;
 import bootcamp.java.mod6.school.dto.SubjectDTO;
 import bootcamp.java.mod6.school.service.DiplomaService;
+import bootcamp.java.mod6.school.service.GradeService;
+import bootcamp.java.mod6.school.service.SubjectService;
 import bootcamp.java.mod6.school.util.AverageMessage;
-import bootcamp.java.mod6.school.util.DiplomaUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -14,10 +15,12 @@ import org.junit.jupiter.api.function.ThrowingSupplier;
 import java.util.List;
 
 public class CertificateServiceImplTest {
-    private final DiplomaService service = new DiplomaService();
+    private final GradeService gradeService = new GradeService();
+    private final SubjectService subjectService = new SubjectService();
+    private final DiplomaService service = new DiplomaService(gradeService, subjectService);
 
     @Test
-    public void shouldThrowNullPointerException() {
+    public void DiplomaService_writeDiploma_Should_Throw_NullPointerException() {
         // Arrange
         StudentDTO s = new StudentDTO();
 
@@ -30,9 +33,9 @@ public class CertificateServiceImplTest {
     }
 
     @Test
-    public void shouldReturnStudentDTO() {
+    public void DiplomaService_writeDiploma_Should_Return_StudentDTO() {
         // Arrange
-        StudentDTO s = CertificateServiceImplTestUtil.createValidStudentBelow9DTO();
+        StudentDTO s = TestUtil.createValidStudentBelow9DTO();
 
         // Act
         ThrowingSupplier<DiplomaDTO> act = () -> this.service.writeDiploma(s);
@@ -43,10 +46,10 @@ public class CertificateServiceImplTest {
     }
 
     @Test
-    public void shouldReturnValidResponse() {
+    public void DiplomaService_writeDiploma_ShouldReturn_DiplomaDTO() {
         // Arrange
-        StudentDTO s = CertificateServiceImplTestUtil.createValidStudentBelow9DTO();
-        DiplomaDTO expected = CertificateServiceImplTestUtil.createValidDiplomaBelow9DTO();
+        StudentDTO s = TestUtil.createValidStudentBelow9DTO();
+        DiplomaDTO expected = TestUtil.createValidDiplomaBelow9DTO();
 
         // Act
         ThrowingSupplier<DiplomaDTO> act = () -> this.service.writeDiploma(s);
@@ -57,10 +60,10 @@ public class CertificateServiceImplTest {
     }
 
     @Test
-    public void shouldAssertNotEquals() {
+    public void DiplomaService_writeDiploma_ShouldAssert_NotEquals() {
         // Arrange
-        StudentDTO s = CertificateServiceImplTestUtil.createValidStudentBelow9DTO();
-        DiplomaDTO expected = CertificateServiceImplTestUtil.createValidDiplomaMaxDTO();
+        StudentDTO s = TestUtil.createValidStudentBelow9DTO();
+        DiplomaDTO expected = TestUtil.createValidDiplomaMaxDTO();
 
         // Act
         ThrowingSupplier<DiplomaDTO> act = () -> this.service.writeDiploma(s);
@@ -71,27 +74,27 @@ public class CertificateServiceImplTest {
     }
 
     @Test
-    public void shouldCalculateAverageZero() {
+    public void SubjectService_calculateAverage_ShouldAssert_Equals() {
         // Arrange
-        List<SubjectDTO> s = CertificateServiceImplTestUtil.createZeroAverageSubjectList();
+        List<SubjectDTO> s = TestUtil.createZeroAverageSubjectList();
         double expected = 0.0;
 
         // Act
-        double result = DiplomaUtil.calculateAverage(s);
+        double result = this.subjectService.calculateAverage(s);
 
         // Assert
         Assertions.assertEquals(expected, result);
     }
 
     @Test
-    public void shouldGetZeroHonor() {
+    public void GradeService_withHonors_ShouldAssert_Equals() {
         // Arrange
-        List<SubjectDTO> s = CertificateServiceImplTestUtil.createZeroAverageSubjectList();
+        List<SubjectDTO> s = TestUtil.createZeroAverageSubjectList();
         String expected = AverageMessage.EQ_ZERO;
 
         // Act
-        double avg = DiplomaUtil.calculateAverage(s);
-        String result = DiplomaUtil.withHonors(avg);
+        double avg = this.subjectService.calculateAverage(s);
+        String result = this.gradeService.withHonors(avg);
 
         // Assert
         Assertions.assertEquals(expected, result);
