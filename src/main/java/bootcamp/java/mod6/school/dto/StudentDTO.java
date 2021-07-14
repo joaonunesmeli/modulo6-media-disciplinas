@@ -15,6 +15,13 @@ public class StudentDTO {
     @Valid
     private List<SubjectDTO> subjects;
 
+    public StudentDTO() {
+    }
+
+    public StudentDTO(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
