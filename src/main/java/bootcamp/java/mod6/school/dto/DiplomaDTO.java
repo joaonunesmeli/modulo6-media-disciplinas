@@ -1,11 +1,11 @@
 package bootcamp.java.mod6.school.dto;
 
-public class ResponseDTO {
+public class DiplomaDTO {
     private String message;
     private double average;
     private StudentDTO student;
 
-    public ResponseDTO(String message, double average, StudentDTO student) {
+    public DiplomaDTO(String message, double average, StudentDTO student) {
         this.message = message;
         this.average = average;
         this.student = student;
@@ -36,10 +36,10 @@ public class ResponseDTO {
     }
 
     public boolean equals(Object obj) {
-        if (!obj.getClass().equals(ResponseDTO.class)) {
+        if (!obj.getClass().equals(DiplomaDTO.class)) {
             return false;
         }
-        ResponseDTO r = (ResponseDTO) obj;
+        DiplomaDTO r = (DiplomaDTO) obj;
         return this.message.equals(r.message)
                 && this.average == r.average
                 && this.student.equals(r.student);

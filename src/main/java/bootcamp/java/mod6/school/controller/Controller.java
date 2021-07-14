@@ -1,8 +1,8 @@
 package bootcamp.java.mod6.school.controller;
 
-import bootcamp.java.mod6.school.dto.ResponseDTO;
+import bootcamp.java.mod6.school.dto.DiplomaDTO;
 import bootcamp.java.mod6.school.dto.StudentDTO;
-import bootcamp.java.mod6.school.service.AverageService;
+import bootcamp.java.mod6.school.service.DiplomaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,16 +14,16 @@ import javax.validation.Valid;
 
 @RestController
 public class Controller {
-    private final AverageService service;
+    private final DiplomaService service;
 
     @Autowired
-    public Controller(AverageService service) {
+    public Controller(DiplomaService service) {
         this.service = service;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/analyzeNotes")
-    public ResponseDTO analyzeNotes(@Valid @RequestBody StudentDTO s) {
-        return this.service.average(s);
+    public DiplomaDTO analyzeNotes(@Valid @RequestBody StudentDTO s) {
+        return this.service.writeDiploma(s);
     }
 }

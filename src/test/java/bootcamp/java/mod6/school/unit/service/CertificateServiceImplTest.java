@@ -1,10 +1,10 @@
 package bootcamp.java.mod6.school.unit.service;
 
-import bootcamp.java.mod6.school.dto.ResponseDTO;
+import bootcamp.java.mod6.school.dto.DiplomaDTO;
 import bootcamp.java.mod6.school.dto.StudentDTO;
 import bootcamp.java.mod6.school.dto.SubjectDTO;
-import bootcamp.java.mod6.school.service.AverageService;
-import bootcamp.java.mod6.school.service.AverageServiceMessage;
+import bootcamp.java.mod6.school.service.DiplomaService;
+import bootcamp.java.mod6.school.util.AverageMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CertificateServiceImplTest {
-    private AverageService service = new AverageService();
+    private DiplomaService service = new DiplomaService();
 
     @Test
     public void shouldThrowNullPointerException() {
@@ -22,7 +22,7 @@ public class CertificateServiceImplTest {
         StudentDTO s = new StudentDTO();
 
         // Act
-        Executable act = () -> this.service.average(s);
+        Executable act = () -> this.service.writeDiploma(s);
 
         // Assert
         NullPointerException ex = Assertions.assertThrows(NullPointerException.class, act);
@@ -35,10 +35,10 @@ public class CertificateServiceImplTest {
         StudentDTO s = createValidStudentBelow9DTO();
 
         // Act
-        ThrowingSupplier<ResponseDTO> act = () -> this.service.average(s);
+        ThrowingSupplier<DiplomaDTO> act = () -> this.service.writeDiploma(s);
 
         // Assert
-        ResponseDTO response = Assertions.assertDoesNotThrow(act);
+        DiplomaDTO response = Assertions.assertDoesNotThrow(act);
         Assertions.assertNotNull(response);
     }
 
@@ -46,13 +46,13 @@ public class CertificateServiceImplTest {
     public void shouldReturnValidResponse() {
         // Arrange
         StudentDTO s = createValidStudentBelow9DTO();
-        ResponseDTO expected = createValidResponseBelow9DTO();
+        DiplomaDTO expected = createValidResponseBelow9DTO();
 
         // Act
-        ThrowingSupplier<ResponseDTO> act = () -> this.service.average(s);
+        ThrowingSupplier<DiplomaDTO> act = () -> this.service.writeDiploma(s);
 
         // Assert
-        ResponseDTO response = Assertions.assertDoesNotThrow(act);
+        DiplomaDTO response = Assertions.assertDoesNotThrow(act);
         Assertions.assertEquals(response, expected);
     }
 
@@ -60,26 +60,26 @@ public class CertificateServiceImplTest {
     public void shouldAssertNotEquals() {
         // Arrange
         StudentDTO s = createValidStudentBelow9DTO();
-        ResponseDTO expected = createValidResponseMaxDTO();
+        DiplomaDTO expected = createValidResponseMaxDTO();
 
         // Act
-        ThrowingSupplier<ResponseDTO> act = () -> this.service.average(s);
+        ThrowingSupplier<DiplomaDTO> act = () -> this.service.writeDiploma(s);
 
         // Assert
-        ResponseDTO response = Assertions.assertDoesNotThrow(act);
+        DiplomaDTO response = Assertions.assertDoesNotThrow(act);
         Assertions.assertNotEquals(response, expected);
     }
 
-    private ResponseDTO createValidResponseBelow9DTO() {
+    private DiplomaDTO createValidResponseBelow9DTO() {
         StudentDTO s = createValidStudentBelow9DTO();
         double avg = avergage(s.getSubjects());
-        return new ResponseDTO(AverageServiceMessage.BELOW_NINE, avg, s);
+        return new DiplomaDTO(AverageMessage.BELOW_NINE, avg, s);
     }
 
-    private ResponseDTO createValidResponseMaxDTO() {
+    private DiplomaDTO createValidResponseMaxDTO() {
         StudentDTO s = createValidStudentMaxDTO();
         double avg = avergage(s.getSubjects());
-        return new ResponseDTO(AverageServiceMessage.BELOW_NINE, avg, s);
+        return new DiplomaDTO(AverageMessage.BELOW_NINE, avg, s);
     }
 
     private StudentDTO createValidStudentBelow9DTO() {
