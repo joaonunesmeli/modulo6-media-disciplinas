@@ -15,6 +15,10 @@ public class SubjectDTO {
     public SubjectDTO() {
     }
 
+    public SubjectDTO(String name) {
+        this.name = name;
+    }
+
     public SubjectDTO(String name, int note) {
         this.name = name;
         this.note = note;
