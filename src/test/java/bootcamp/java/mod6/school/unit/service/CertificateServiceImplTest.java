@@ -2,11 +2,16 @@ package bootcamp.java.mod6.school.unit.service;
 
 import bootcamp.java.mod6.school.dto.DiplomaDTO;
 import bootcamp.java.mod6.school.dto.StudentDTO;
+import bootcamp.java.mod6.school.dto.SubjectDTO;
 import bootcamp.java.mod6.school.service.DiplomaService;
+import bootcamp.java.mod6.school.util.AverageMessage;
+import bootcamp.java.mod6.school.util.DiplomaUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.function.ThrowingSupplier;
+
+import java.util.List;
 
 public class CertificateServiceImplTest {
     private final DiplomaService service = new DiplomaService();
@@ -63,5 +68,32 @@ public class CertificateServiceImplTest {
         // Assert
         DiplomaDTO response = Assertions.assertDoesNotThrow(act);
         Assertions.assertNotEquals(response, expected);
+    }
+
+    @Test
+    public void shouldCalculateAverageZero() {
+        // Arrange
+        List<SubjectDTO> s = CertificateServiceImplTestUtil.createZeroAverageSubjectList();
+        double expected = 0.0;
+
+        // Act
+        double result = DiplomaUtil.calculateAverage(s);
+
+        // Assert
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    public void shouldGetZeroHonor() {
+        // Arrange
+        List<SubjectDTO> s = CertificateServiceImplTestUtil.createZeroAverageSubjectList();
+        String expected = AverageMessage.EQ_ZERO;
+
+        // Act
+        double avg = DiplomaUtil.calculateAverage(s);
+        String result = DiplomaUtil.withHonors(avg);
+
+        // Assert
+        Assertions.assertEquals(expected, result);
     }
 }

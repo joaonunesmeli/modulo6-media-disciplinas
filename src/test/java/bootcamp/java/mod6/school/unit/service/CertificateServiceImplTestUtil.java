@@ -37,11 +37,11 @@ public final class CertificateServiceImplTestUtil {
         return s;
     }
 
-    // public static List<SubjectDTO> createZeroAverageSubjectList() {
-    //     List<SubjectDTO> subs = createSubjectList();
-    //     updateNotes(subs, 0);
-    //     return subs;
-    // }
+    public static List<SubjectDTO> createZeroAverageSubjectList() {
+        List<SubjectDTO> subs = createSubjectList();
+        updateNotes(subs, 0);
+        return subs;
+    }
 
     // public static List<SubjectDTO> createBelow7AverageSubjectList() {
     //     List<SubjectDTO> subs = createSubjectList();
